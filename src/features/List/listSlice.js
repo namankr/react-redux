@@ -5,7 +5,7 @@ const initialState = {
   user: [],
   status: "idle",
   removedUser: [],
-  counter: 1,
+  counter: 0,
 };
 
 export const getUserAsync = createAsyncThunk("user/fetchUser", async () => {
@@ -34,7 +34,8 @@ export const listSlice = createSlice({
         let user = current(state.user);
         let len = removedUser.length;
         if (len - counter > 0) {
-          let tempObj = removedUser[len - counter]; //[...removedUser, ...user];
+          //removedUser.slice().reverse();
+          let tempObj = removedUser[counter]; //[...removedUser, ...user];
           let tempArray = [];
           tempArray.push(tempObj);
           state.user = [...tempArray, ...user]; //mergedArray.filter((item, pos) => mergedArray.indexOf(item) === pos);

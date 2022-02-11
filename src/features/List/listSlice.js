@@ -26,29 +26,18 @@ export const listSlice = createSlice({
       // immutable state based off those changes
       // console.log('actionadd',state.user);
 
-      console.log("before", current(state));
       let removedUser = current(state.removedUser);
-      console.log("extract user", removedUser);
       if (removedUser && removedUser.length < 1) {
         alert("first, please remove a user. To add a user");
       } else {
         let counter = state.counter;
-        console.log(counter, "counter");
         let user = current(state.user);
-        console.log(removedUser.length, counter);
         let len = removedUser.length;
         if (len - counter > 0) {
-          console.log(
-            removedUser[len - counter],
-            "removed user",
-            len - counter
-          );
           let tempObj = removedUser[len - counter]; //[...removedUser, ...user];
           let tempArray = [];
           tempArray.push(tempObj);
-          console.log(tempArray, "temp array");
           state.user = [...tempArray, ...user]; //mergedArray.filter((item, pos) => mergedArray.indexOf(item) === pos);
-          console.log("state after add", current(state));
           state.counter += 1;
         }
       }
@@ -57,7 +46,6 @@ export const listSlice = createSlice({
       let user = current(state.user);
       let newAraay = [...user];
       state.removedUser.push(newAraay.shift());
-      console.log(user, newAraay, "user list");
       state.user = [...newAraay];
     },
 
